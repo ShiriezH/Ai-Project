@@ -1,11 +1,14 @@
-function showAnswer(response) {
-  alert(response.data.answer);
+function displayPoem(response) {
+  
+  new Typewriter("#poem", {
+    strings: response.data.answer,
+    autoStart: true,
+    delay: 1,
+  });
+
+  let submitButton = document.querySelector("#submit-button");
+  submitButton.removeAttribute("disabled");
 }
 
-let apiKey = "9f87bf3a718647b2o7b016cf9t1f3ad8";
-let context =
-  "be polite and provide a very short answer. make sure to pick one";
-let prompt = "what's the best cuisine in the world?";
-let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
-
-axios.get(apiUrl).then(showAnswer);
+let poemFormElement = document.querySelector("#poem-generator-form");
+poemFormElement.addEventListener("submit", generatePoem);
